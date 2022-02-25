@@ -216,9 +216,7 @@ namespace Calculations
         // Method that decides how many number there is in the textstring and return a int
         public int LengthOfNumbersArray(string numbers, char token)
         {
-            StringBuilder stb= new StringBuilder();
-            stb.Append(numbers);
-            numbers = ParenthasesRemove(stb);
+           
             int index = 0;
             if (!ControlDouble(char.ToString(numbers[numbers.Length - 1])))
             {
@@ -255,11 +253,12 @@ namespace Calculations
         // Error handling is done by try catch.
         public double[] ToDoubleArray(string numbers, char token)
         {
+            StringBuilder stbTemp = new StringBuilder();
+            numbers = ParenthasesRemove(stbTemp.Append(numbers));
             int countIndex = LengthOfNumbersArray(numbers, token);
                
             double[] result = new double[countIndex + 1];
-            StringBuilder stbTemp = new StringBuilder();
-            numbers = ParenthasesRemove(stbTemp.Append(numbers));
+            
             countIndex = 0;
             StringBuilder stb = new StringBuilder();
             
