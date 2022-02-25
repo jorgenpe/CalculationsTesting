@@ -251,6 +251,11 @@ namespace Calculations
                 {
                     stb.Append(numbers[i]);
                 }
+// Special case where the input is a negativ number. ned to single out the negativ number in the input.  2-2- -2 = 2 in input.Input don't use () to single out negsativ numbers
+                {
+                else if(i>0 && numbers[i-1] == '-' && numbers[i] == '-')
+                    stb.Append(numbers[i]); 
+                }
                 else if(numbers[i] == token)
                 {
                     try { 

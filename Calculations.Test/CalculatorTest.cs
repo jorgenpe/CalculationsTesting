@@ -54,7 +54,7 @@ namespace Calculations.Test
         [Theory]
         [InlineData(2.1, 2, 0.1)]
         [InlineData(3.1, 2.5, 0.6)]
-        [InlineData(2.6, 2, 0.6)]
+        [InlineData(2.6, -2, 4.6)]
         [InlineData(2.3, 2.6, -0.3)]
         [InlineData(2, 0, 2)]
         [InlineData(0, 0, 0)]
@@ -79,7 +79,7 @@ namespace Calculations.Test
 
         [Theory]
         [InlineData(new double[] { 2.1, 2, 5.4 }, -5.3)]
-        [InlineData(new double[] { 2.1, 0, 5.4, 1 }, -4.3)]
+        [InlineData(new double[] { (-2.1), 0, 5.4, 1 }, -8.5)]
         [InlineData(new double[] { 2.1, 2, 5.4, 2.3, 5 }, -12.6)]
         [InlineData(new double[] { 2.1, 2, 5, 2, -10 }, 3.1)]
         [InlineData(new double[] { 2 }, 2)]
