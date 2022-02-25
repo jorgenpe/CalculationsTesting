@@ -216,6 +216,9 @@ namespace Calculations
         // Method that decides how many number there is in the textstring and return a int
         public int LengthOfNumbersArray(string numbers, char token)
         {
+            StringBuilder stb= new StringBuilder();
+            stb.Append(numbers);
+            numbers = ParenthasesRemove(stb);
             int index = 0;
             if (!ControlDouble(char.ToString(numbers[numbers.Length - 1])))
             {
@@ -230,6 +233,24 @@ namespace Calculations
             return index;
         }
 
+        public string ParenthasesRemove(StringBuilder stb)
+        {
+            
+            for (int i = 0; i < stb.Length; i++)
+            {
+                if(stb[i] == '(')
+                {
+                stb.Remove(i, 1);
+                }
+                else if(stb[i] == ')')
+                {
+                stb.Remove(i, 1);
+                }
+            }
+            
+            return stb.ToString();
+        }
+
         // Method that creates arrays of doubles and returns a array of doubles. It extract the numbers from the text string and store them in a array.
         // Error handling is done by try catch.
         public double[] ToDoubleArray(string numbers, char token)
@@ -237,24 +258,33 @@ namespace Calculations
             int countIndex = LengthOfNumbersArray(numbers, token);
                
             double[] result = new double[countIndex + 1];
-            
+            StringBuilder stbTemp = new StringBuilder();
+            numbers = ParenthasesRemove(stbTemp.Append(numbers));
             countIndex = 0;
             StringBuilder stb = new StringBuilder();
+            
             for (int i= 0; i < numbers.Length; i++)
             {
-                
+
                 if (numbers[i] != token)
                 {
                     stb.Append(numbers[i]);
+
                 }
-                else if(i == 0 && numbers[0] == '-')
+                else if (i == 0 && numbers[0] == '-')
+                {
+                    stb.Append(numbers[i]);
+                    
+                }
+                else if(numbers[i] == '(' || numbers[i] == ')')
                 {
                     stb.Append(numbers[i]);
                 }
-// Special case where the input is a negativ number. ned to single out the negativ number in the input.  2-2- -2 = 2 in input.Input don't use () to single out negsativ numbers
-                {
-                else if(i>0 && numbers[i-1] == '-' && numbers[i] == '-')
-                    stb.Append(numbers[i]); 
+                // Special case where the input is a negativ number. ned to single out the negativ number in the input.  2-2- -2 = 2 in input.Input don't use () to single out negsativ numbers
+
+                else if (i > 0 && numbers[i - 1] == '-' && numbers[i] == '-') {
+                    stb.Append(numbers[i]);
+                    
                 }
                 else if(numbers[i] == token)
                 {
